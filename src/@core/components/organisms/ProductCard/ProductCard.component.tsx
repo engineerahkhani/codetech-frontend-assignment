@@ -70,6 +70,7 @@ const useStyles = createUseStyles(
       borderRadius: radii.sm,
       overflow: 'hidden',
       objectFit: 'cover',
+      maxHeight: 160,
     },
 
     infoWrapper: {
