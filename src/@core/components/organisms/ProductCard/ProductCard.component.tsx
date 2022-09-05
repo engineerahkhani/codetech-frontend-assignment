@@ -51,6 +51,7 @@ const useStyles = createUseStyles(
   ({ colors, media, sizes, radii }: ITheme) => ({
     cardRoot: {},
     cardWrapper: {
+      width: '100%',
       backgroundColor: colors.white,
       display: 'flex',
       flexDirection: 'column',

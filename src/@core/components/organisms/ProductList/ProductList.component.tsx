@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Flex from '@core/components/atoms/Flex';
 import ProductCard from '@core/components/organisms/ProductCard';
 import products from '@core/mocks/products.json';
@@ -11,7 +11,9 @@ import ProductListSkeleton from './ProductList.skeleton';
 
 const ProductList = () => {
   const classes = useStyles();
-  const { data, isLoading } = useReactQuery(['products'], getProducts);
+  const { data, isLoading } = useReactQuery(['products'], getProducts, {
+    refetchOnWindowFocus: false,
+  });
   const {
     state: { products },
     dispatch,
@@ -49,19 +51,20 @@ const useStyles = createUseStyles(({ media, radii, sizes }) => ({
   productCardWrapper: {
     display: 'flex',
     flexGrow: 0,
-    flexBasis: '50%',
+    flexBasis: '100%',
     flexShrink: 0,
     borderRadius: radii.sm,
     padding: sizes.xs,
   },
   [media.tablet]: {
-    listWrapper: {},
-    ProductListRoot: {
-      flexDirection: 'row',
+    productCardWrapper: {
+      flexBasis: '50%',
+      padding: sizes.sm,
     },
+  },
+  [media.desktop]: {
     productCardWrapper: {
       flexBasis: '33.33%',
-      padding: sizes.sm,
     },
   },
 }));

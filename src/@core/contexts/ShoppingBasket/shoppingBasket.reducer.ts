@@ -1,6 +1,8 @@
 import { IProduct } from '../../types';
 
-export const initialState = {
+export const initialState = JSON.parse(
+  localStorage.getItem('shoppingBasket') as string
+) || {
   products: [],
 };
 

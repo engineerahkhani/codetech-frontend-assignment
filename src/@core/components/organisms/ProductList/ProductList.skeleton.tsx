@@ -16,7 +16,7 @@ const ProductListSkeleton = () => {
     </Flex>
   );
 };
-const useStyles = createUseStyles(({ media, radii, sizes }) => ({
+const useStyles = createUseStyles(({ media }) => ({
   listWrapper: {
     display: 'flex',
     flexDirection: 'row',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createUseStyles } from '@core/utils/makeStyle';
-import { ITheme } from '@core/types/theme';
 import Flex from '../../atoms/Flex';
 
 interface IMainLayout {
@@ -17,7 +16,7 @@ const MainLayout: React.FC<IMainLayout> = ({ children, ...props }) => {
   );
 };
 
-const useStyles = createUseStyles(({ sizes, colors }: ITheme) => ({
+const useStyles = createUseStyles(({ sizes, colors }) => ({
   mainLayoutRoot: {
     padding: sizes.md,
     background: colors.background,

@@ -3,6 +3,7 @@ import Flex from '@core/components/atoms/Flex';
 import { createUseStyles } from '@core/utils/makeStyle';
 import ShoppingBasket from '@core/components/organisms/ShoppingBasket';
 import ProductList from '../../@core/components/organisms/ProductList';
+
 const Home = () => {
   const classes = useStyles();
 
@@ -13,11 +14,17 @@ const Home = () => {
     </Flex>
   );
 };
-const useStyles = createUseStyles(({ media, radii, sizes }) => ({
+const useStyles = createUseStyles(({ media, sizes }) => ({
   homeRoot: {
     display: 'flex',
-    flexDirection: 'row',
-    padding: sizes.lg,
+    flexDirection: 'column-reverse',
+    padding: sizes.sm,
+  },
+  [media.tablet]: {
+    homeRoot: {
+      flexDirection: 'row',
+      padding: sizes.lg,
+    },
   },
 }));
 

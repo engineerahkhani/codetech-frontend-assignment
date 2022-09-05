@@ -1,6 +1,6 @@
 import request from '../utils/request';
 import END_POINTS from '../constants/endpoints';
-import { IProduct, IProductApi, IResponse } from '../types';
+import { IProductApi, IResponse } from '../types';
 import normalizers from './normalizers';
 
 const getProducts = async () => {

@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from '../../atoms/Image';
 import { IProduct } from '../../../types';
 import { cnj, createUseStyles } from '@core/utils/makeStyle';
-import { ITheme } from '../../../types/theme';
 import Flex from '../../atoms/Flex';
-import useTranslation from '../../../hooks/useTranslation';
 import Text from '../../atoms/Text';
 import Button from '../../atoms/Button';
 import Divider from '../../atoms/Divider';
 import Icon from '../../atoms/Icon';
+import useTranslation from '../../../hooks/useTranslation';
 
 interface IShoppingBasketCardProps {
   data: IProduct;
@@ -24,8 +23,18 @@ const ShoppingBasketCard: React.FC<IShoppingBasketCardProps> = ({
   visibleDivider,
 }) => {
   const classes = useStyles();
-  const { t } = useTranslation();
   const onClickRemove = () => onClickAddRemoveFromBasket(data);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClickRemove();
+    }, data.orderLimitTime);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [data.id]);
 
   return (
     <Flex className={cnj(classes.cardRoot, className)}>
@@ -48,50 +57,51 @@ const ShoppingBasketCard: React.FC<IShoppingBasketCardProps> = ({
   );
 };
 
-const useStyles = createUseStyles(
-  ({ colors, media, sizes, radii }: ITheme) => ({
-    cardRoot: {},
-    cardWrapper: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      borderRadius: radii.sm,
-      border: [[1, 'slide', colors.black]],
-    },
-    imageWrapper: {
-      backgroundColor: '#EFEFEF',
-      maxWidth: 80,
-      maxHeight: 80,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      boxShadow: [[0, 4, 10, colors.black10]],
-      position: 'relative',
-    },
-    cardImage: {
-      borderRadius: radii.sm,
-      overflow: 'hidden',
-      objectFit: 'cover',
-    },
+const useStyles = createUseStyles(({ colors, sizes, radii }) => ({
+  cardRoot: {},
+  cardWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: radii.sm,
+    border: [[1, 'slide', colors.black]],
+  },
+  imageWrapper: {
+    backgroundColor: colors.border,
+    maxWidth: 80,
+    maxHeight: 80,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: [[0, 4, 10, colors.black10]],
+    position: 'relative',
+  },
+  cardImage: {
+    borderRadius: radii.sm,
+    overflow: 'hidden',
+    objectFit: 'cover',
+  },
 
-    infoWrapper: {
-      marginLeft: sizes.md,
-    },
-    priceWithUnit: {
-      marginTop: sizes.sm,
-    },
-    divider: {
-      margin: [[15, 0]],
-    },
-    iconWrapper: {
-      backgroundColor: colors.transparent,
-      padding: [[0, 0]],
-      borderRadius: radii.round,
-      position: 'absolute',
-      left: -15,
-      toP: 15,
-    },
-  })
-);
+  infoWrapper: {
+    marginLeft: sizes.md,
+  },
+  priceWithUnit: {
+    marginTop: sizes.sm,
+  },
+  divider: {
+    margin: [[15, 0]],
+  },
+  iconWrapper: {
+    backgroundColor: colors.transparent,
+    padding: [[0, 0]],
+    borderRadius: radii.round,
+    position: 'absolute',
+    left: -15,
+    toP: 15,
+  },
+  expired: {
+    color: colors.red,
+  },
+}));
 
 export default ShoppingBasketCard;

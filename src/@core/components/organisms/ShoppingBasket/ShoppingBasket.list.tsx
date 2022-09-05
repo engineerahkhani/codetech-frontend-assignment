@@ -7,7 +7,10 @@ import ShoppingBasketCard from '../ShoppingBasketCard';
 
 const ShoppingBasketList: React.FC = () => {
   const classes = useStyles();
-  const { state:{products}, dispatch } = useShoppingBasket();
+  const {
+    state: { products },
+    dispatch,
+  } = useShoppingBasket();
 
   const removeFromBasketHandler = (product: IProduct) => {
     dispatch({ type: 'REMOVE_FROM_BASKET', payload: product.id });

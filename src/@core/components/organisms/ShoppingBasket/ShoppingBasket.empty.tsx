@@ -17,7 +17,7 @@ const EmptyShoppingBasket: React.FC = () => {
   );
 };
 
-const useStyles = createUseStyles(({ colors, media, sizes, radii }) => ({
+const useStyles = createUseStyles(({ colors, media, radii }) => ({
   shoppingBasketRoot: {
     backgroundColor: colors.white,
     boxShadow: [[0, 4, 10, colors.black10]],
